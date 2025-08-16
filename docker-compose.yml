@@ -1,0 +1,13 @@
+# ----------------------------------------------------------------------------
+# Docker Compose Configuration for the project
+# This file defines all the services needed to run Credora
+#
+# Services include : 
+#
+# Volumes include :
+#
+# Networks include :
+#
+# Environment variables include :
+# ----------------------------------------------------------------------------
+version: '3.8'

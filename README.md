@@ -43,6 +43,31 @@ credit_card_optimizer/
 - **API Testing**: Comprehensive test suites
 - **Documentation**: Swagger/OpenAPI specs
 
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+ and npm
+- Python 3.8+ (for ML services)
+- Docker and Docker Compose
+
+### 1. Clone and Setup
+   ```bash
+   git clone <repository-url>
+   cd Credora
+   
+   ```
+
+### 2. Setup ENV
+   ```bash
+# Windows
+.\setup-env.ps1
+   
+# Linux/macOS
+./setup-env.sh
+   ```
+   
+### 3. Start Services
+ TODO @vedant
 
 ## 🤝 Contributing
 

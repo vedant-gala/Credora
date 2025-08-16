@@ -1,0 +1,7 @@
+# ----------------------------------------------------------------------------
+# Additions made to the .gitignore file will ensure that git does not
+# commit the files and directories that are listed
+# ----------------------------------------------------------------------------
+
+# Environment variables
+.env
