@@ -52,7 +52,7 @@ credit_card_optimizer/
 
 ### 1. Clone and Setup
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/vedant-gala/Credora
    cd Credora
    
    ```
