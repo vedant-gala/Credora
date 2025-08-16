@@ -11,3 +11,12 @@
 # Environment variables include :
 # ----------------------------------------------------------------------------
 version: '3.8'
+
+services:
+  # Backend API
+  backend:
+    # Specify how to build the Docker image for the backend
+    build:
+      context: ./backend        # Path to the build context (Directory within Docker)
+      dockerfile: Dockerfile    # Name of the Dockerfile to use for building the image
+      
