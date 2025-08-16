@@ -2,7 +2,7 @@
 Optimize your spends to reap maximum credit card rewards!
 A comprehensive credit card management and optimization platform that helps users maximize rewards, track transactions, and make informed financial decisions.
 
-## 🏗️ Project Structure
+## 🏗️ Proposed Project Structure
 ```
 credit_card_optimizer/
 ├── backend/               # Node.js + Express.js backend
@@ -52,7 +52,7 @@ credit_card_optimizer/
 
 ### 1. Clone and Setup
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/vedant-gala/Credora
    cd Credora
    
    ```
