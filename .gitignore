@@ -3,8 +3,9 @@
 # commit the files and directories that are listed
 # ----------------------------------------------------------------------------
 
-# Environment variables
+# Environment configuration files
 .env
 
-# Dependencies
+# Directories
 node_modules/
+dist/

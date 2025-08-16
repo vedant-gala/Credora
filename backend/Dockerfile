@@ -45,18 +45,19 @@ COPY package*.json ./
 # - Executes a command inside the container
 # - Used to install dependencies, build the app, etc.
 # - Can be used multiple times to perform different tasks
-# - The '--only=production' flag ensures that only production dependencies are installed (no devDependencies)
-#   This keeps the image smaller and more secure for production use
-RUN npm ci --only=production
+# - The '--omit=dev' flag tells npm to skip installing devDependencies, ensuring only production dependencies are installed.
+# - The '--only=production' flag is an older way to achieve the same effect, but '--omit=dev' is now preferred and more explicit.
+#   Both switches result in a smaller, more secure image by excluding development-only packages.
+RUN npm ci --omit=dev
 
 # Copy the rest of the app code
 COPY . .
 
 # Build the app - TODO @vedant-gala
-#RUN npm run build
+RUN npm run build
 
 # CMD instruction : 
 # - Specifies the default command to run when the container starts
 # - This is the main process that will run in the container
 # - Can be overridden when running the container - TODO @vedant-gala
-#CMD ["npm", "start"]
+CMD ["npm", "start"]

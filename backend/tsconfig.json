@@ -1,0 +1,64 @@
+{
+    "compilerOptions": {
+      // ===== BASIC COMPILATION OPTIONS =====
+      "target": "ES2020",                                                      // ECMAScript target version for output
+      "module": "commonjs",                                                    // Module system for output (Node.js compatible)
+      "lib": ["ES2020"],                                                       // Library files to include in compilation
+      
+      // ===== OUTPUT OPTIONS =====
+      "outDir": "./dist",                                                      // Output directory for compiled files
+      "rootDir": "./src",                                                      // Root directory of source files
+      
+      // ===== STRICT TYPE CHECKING =====
+      "strict": true,                                                          // Enable all strict type checking options
+      "noImplicitAny": true,                                                   // Raise error on expressions with implied 'any' type
+      "noImplicitReturns": true,                                               // Report error when not all code paths return a value
+      "noImplicitThis": true,                                                  // Raise error on 'this' expressions with implied 'any' type
+      "noUnusedLocals": true,                                                  // Report errors on unused local variables
+      "noUnusedParameters": true,                                              // Report errors on unused parameters
+      "exactOptionalPropertyTypes": true,                                      // Enable exact optional property types
+      "noImplicitOverride": true,                                              // Ensure overriding members are marked with override keyword
+      "noPropertyAccessFromIndexSignature": true,                              // Enforces using indexed access for keys declared using an index signature
+      "noUncheckedIndexedAccess": true,                                        // Add undefined to a type when accessed using an index
+      
+      // ===== CODE QUALITY =====
+      "allowUnusedLabels": false,                                              // Report errors on unused labels
+      "allowUnreachableCode": false,                                           // Report errors on unreachable code
+      
+      // ===== MODULE RESOLUTION =====
+      "esModuleInterop": true,                                                 // Enable interop between CommonJS and ES Modules
+      "skipLibCheck": true,                                                    // Skip type checking of declaration files
+      "forceConsistentCasingInFileNames": true,                                // Ensure consistent casing in file names
+      "resolveJsonModule": true,                                               // Include modules imported with .json extension
+      
+      // ===== EMIT OPTIONS =====
+      "declaration": true,                                                     // Generate corresponding .d.ts files
+      "declarationMap": true,                                                  // Generate sourcemaps for .d.ts files
+      "sourceMap": true,                                                       // Generate source maps for debugging
+      "removeComments": true,                                                  // Remove all comments except copy-right header comments
+      
+      // ===== PATH MAPPING =====
+      "baseUrl": "./src",                                                      // Base directory to resolve non-relative module names
+      "paths": {
+        "@/*": ["*"]                                                           // Alias for src directory
+      }
+    },
+    
+    // ===== INCLUDE/EXCLUDE PATTERNS =====
+    "include": [
+      "src/**/*"                                                               // Include all files in src directory and subdirectories
+    ],
+    "exclude": [
+      "node_modules",                                                          // Exclude node_modules directory
+      "dist",                                                                  // Exclude build output directory
+      "tests",                                                                 // Exclude tests directory
+      "**/*.test.ts",                                                          // Exclude test files
+      "**/*.spec.ts"                                                           // Exclude spec files
+    ],
+    
+    // ===== TS-NODE CONFIGURATION =====
+    "ts-node": {
+      "require": ["tsconfig-paths/register"]                                   // Enable path mapping in ts-node for development
+    }
+  }
+  
