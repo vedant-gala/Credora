@@ -1,5 +1,5 @@
 ## Purpose
-This file exists because NPM does not allow comments inside package*.json.
+This file only exists because NPM does not allow comments inside package*.json.
 
 Why JSON Doesn't Support Comments:
 1. JSON Specification:
