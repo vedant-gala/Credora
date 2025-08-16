@@ -45,6 +45,8 @@ COPY package*.json ./
 # - Executes a command inside the container
 # - Used to install dependencies, build the app, etc.
 # - Can be used multiple times to perform different tasks
+# - The '--only=production' flag ensures that only production dependencies are installed (no devDependencies)
+#   This keeps the image smaller and more secure for production use
 RUN npm ci --only=production
 
 # Copy the rest of the app code
