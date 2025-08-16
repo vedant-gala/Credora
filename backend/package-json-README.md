@@ -62,4 +62,30 @@ Why JSON Doesn't Support Comments:
  * - Always commit both files to git!
  */
 
+/**
+ * 📚 About "dependencies" and "devDependencies"
+ * 
+ * - "dependencies":
+ *     - These are packages your app needs to run in production.
+ *     - When someone installs your project (npm install), these packages are installed by default.
+ *     - Example: express, lodash, etc.
+ * 
+ * - "devDependencies":
+ *     - These are packages needed only during development (not in production).
+ *     - Examples: testing libraries (jest, mocha), build tools (typescript, webpack), linters, etc.
+ *     - They are installed by default, but if someone runs `npm install --production`, only "dependencies" are installed.
+ * 
+ * 🧠 How does NPM know what to install?
+ * 
+ * - When you run `npm install`:
+ *     - NPM reads your package.json.
+ *     - It installs everything listed under "dependencies" and "devDependencies" (unless you use the --production flag).
+ *     - It also reads package-lock.json to ensure exact versions are installed for consistency.
+ * 
+ * - If you deploy to production and want to skip dev tools:
+ *     - Use `npm install --production` or set the NODE_ENV=production environment variable.
+ *     - Only "dependencies" will be installed, making your deployment smaller and faster.
+ * 
+ * 💡 Tip: Always put packages needed to *run* your app in "dependencies", and tools needed only for *development* in "devDependencies".
+ */
 
