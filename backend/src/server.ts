@@ -1,3 +1,16 @@
+//=========================================================================================
+// File : server.ts
+// Description : This file is the main entry point for the backend server.
+//
+// Purpose : 
+// - Loads environment variables
+// - Manages database and Redis connections
+// - Starts the HTTP express server
+// - Handles graceful shutdown, uncaught exceptions and unhandled rejections
+// - Logs server startup status and connection information
+//=========================================================================================
+
+// Imports
 import dotenv from 'dotenv';
 import app from '@/app';
 
