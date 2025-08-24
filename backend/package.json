@@ -1,5 +1,4 @@
 {
-  "name": "credora-backend",
   "version": "1.0.0",
   "description": "Backend for Credora",
   "main": "dist/server.js",
@@ -7,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server.ts",
     "start": "node dist/server.js",
-    "build": "tsc && tsc-alias"
+    "build": "tsc && tsc-alias",
+    "clean": "rimraf dist"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -25,7 +25,8 @@
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.3",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "rimraf": "^5.0.5"
   },
   "keywords": [
     "api",

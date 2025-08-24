@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "description": "Shared utilities and types for Credora",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Shared test script - to be implemented\"",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.8.2",
+    "rimraf": "^5.0.5"
+  },
+  "keywords": [
+    "shared",
+    "utilities",
+    "types",
+    "typescript",
+    "credora"
+  ],
+  "author": "Credora Team",
+  "license": "MIT"
+}

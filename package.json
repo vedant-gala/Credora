@@ -1,0 +1,40 @@
+{
+  "name": "credora",
+  "version": "1.0.0",
+  "description": "Credora - A comprehensive financial platform with backend, web dashboard, and mobile applications",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "web-dashboard",
+    "mobile-app",
+    "shared"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev --workspace=backend",
+    "dev:web": "npm run dev --workspace=web-dashboard",
+    "dev:mobile": "npm run dev --workspace=mobile-app",
+    "build:backend": "npm run build --workspace=backend",
+    "build:web": "npm run build --workspace=web-dashboard",
+    "build:mobile": "npm run build --workspace=mobile-app",
+    "build:all": "npm run build --workspaces",
+    "test:all": "npm run test --workspaces",
+    "install:all": "npm install",
+    "clean": "npm run clean --workspaces"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  },
+  "keywords": [
+    "credora",
+    "financial",
+    "monorepo",
+    "typescript",
+    "javascript"
+  ],
+  "author": "Credora Team",
+  "license": "MIT"
+}

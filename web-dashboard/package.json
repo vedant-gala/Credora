@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "description": "Web dashboard for Credora",
+  "scripts": {
+    "dev": "echo \"Web dashboard dev script - to be implemented\"",
+    "build": "echo \"Web dashboard build script - to be implemented\"",
+    "test": "echo \"Web dashboard test script - to be implemented\"",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "rimraf": "^5.0.5"
+  },
+  "keywords": [
+    "web",
+    "dashboard",
+    "frontend",
+    "typescript",
+    "credora"
+  ],
+  "author": "Credora Team",
+  "license": "MIT"
+}

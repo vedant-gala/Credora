@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "description": "Mobile application for Credora",
+  "scripts": {
+    "dev": "echo \"Mobile app dev script - to be implemented\"",
+    "build": "echo \"Mobile app build script - to be implemented\"",
+    "test": "echo \"Mobile app test script - to be implemented\"",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "rimraf": "^5.0.5"
+  },
+  "keywords": [
+    "mobile",
+    "app",
+    "react-native",
+    "typescript",
+    "credora"
+  ],
+  "author": "Credora Team",
+  "license": "MIT"
+}
