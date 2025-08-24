@@ -1,7 +1,5 @@
 // Common types for Credora
 
-export null;
-
 /*export interface User {
   id: string;
   email: string;

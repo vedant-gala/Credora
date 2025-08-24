@@ -5,12 +5,12 @@
     "rootDir": "./src",
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["*"],
-      "@shared/*": ["../shared/*"]
+      "@/*": ["./src/*"],           // Points to backend/src/*
+      "@shared/*": ["../shared/*"]  // Points to shared/*
     }
   },
   "include": [
-    "src/**/*"
+    "./src/**/*"
   ],
   "exclude": [
     "node_modules",
