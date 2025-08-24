@@ -25,18 +25,23 @@
 import express from 'express';
 import corsMiddleware from '@/middleware/cors.middleware';
 import helmetMiddleware from '@/middleware/helmet.middleware';
+import rateLimitMiddleware from '@/middleware/ratelimit.middleware';
 import errorMiddleware from '@/middleware/error.middleware';
 
 // Express application
 const app = express();
+
 //-------------------------------------
 // Middlewares
 //-------------------------------------
-// GLOBAL MIDDLEWARE : Pass the CORS Middleware function to the Express application
+// GLOBAL MIDDLEWARE : CORS : Pass the CORS Middleware function to the Express application
 app.use(corsMiddleware);
 
-// GLOBAL MIDDLEWARE : Pass the Helmet Middleware function to the Express application
+// GLOBAL MIDDLEWARE : Helmet : Pass the Helmet Middleware function to the Express application
 app.use(helmetMiddleware);
+
+// GLOBAL MIDDLEWARE : Rate Limit : Pass the Rate Limit Middleware function to the Express application
+app.use(rateLimitMiddleware);
 
 //-------------------------------------
 // Health-check endpoint
