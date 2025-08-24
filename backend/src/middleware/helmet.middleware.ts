@@ -32,8 +32,9 @@ function helmetMiddleware(req: express.Request, res: express.Response, next: exp
 
     console.log('Helmet Middleware called');
 
-    // The Helmet function returns another function, so we call it with the request, response and next function
-    helmetOutput(req, res, next);
+    // The Helmet function returns another function, so we call it with the request, response and next inputs
+    // and return as the output of this function
+    return helmetOutput(req, res, next);
 }
 
 // Export the Helmet middleware function

@@ -25,6 +25,9 @@ function errorMiddleware(err: Error, req: express.Request, res: express.Response
 
     // Send the error response
     res.status(500).json({ error: modifiedError });
+
+    // Return the error response
+    return res.status(500).json({ error: modifiedError });
 }
 
 // Export the Error middleware function

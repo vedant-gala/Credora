@@ -28,7 +28,13 @@ function rateLimitMiddleware(req: express.Request, res: express.Response, next: 
     }
 
     // Call the rate limit function with the options supplied above
-    rateLimit(rateLimitOptions);
+    const rateLimitOutput = rateLimit(rateLimitOptions);
+
+    console.log('Rate Limit Middleware called');
+
+    // The rate limit function returns another function that it created using the options supplied earlier
+    // so next we call it with the request, response and next inputs and return as the output of this function
+    return rateLimitOutput(req, res, next);
 }
 
 // Export the rate limit middleware function

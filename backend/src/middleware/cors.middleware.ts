@@ -34,8 +34,9 @@ function corsMiddleware(req: express.Request, res: express.Response, next: expre
 
     console.log('CORS Middleware called');
 
-    // The CORS function returns another function, so we call it with the request, response and next function
-    corsOutput(req, res, next);
+    // The CORS function returns another function, so we call it with the request, response and next inputs
+    // and return as the output of this function
+    return corsOutput(req, res, next);
 }
 
 // Export the CORS middleware function
