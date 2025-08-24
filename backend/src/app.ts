@@ -22,63 +22,71 @@
 //=========================================================================================
 
 // Imports
-import cors from 'cors';
 import express from 'express';
-import helmet from 'helmet';
+import corsMiddleware from './middleware/cors.middleware';
+import helmetMiddleware from './middleware/helmet.middleware';
+import errorMiddleware from './middleware/error.middleware';
 
 // Express application
 const app = express();
 
-// TODO : Add a custom logging middleware here for packet traversal
+//-------------------------------------
+// Middlewares
+//-------------------------------------
+// GLOBAL MIDDLEWARE : Pass the CORS Middleware function to the Express application
+app.use(corsMiddleware);
 
-// Middleware configuration // 
-
-//-------------------------------------------------------------------------------------------
-// CORS (Cross-Origin Resource Sharing) middleware configuration.
-//
-// This allows the backend API to accept requests from specified origins (frontends).
-//
-// Without CORS, a website could potentially:
-// - Make requests to your bank's API from a malicious site
-// - Access your private data from other domains
-// - Perform actions on your behalf without permission
-//
-// When a cross-origin request is made, the browser:
-// - Sends a preflight request (OPTIONS) to check if the request is allowed
-// - Server responds with CORS headers indicating what's permitted
-// - Browser either allows or blocks the actual request
-//-------------------------------------------------------------------------------------------
-app.use(cors());
-
-//-------------------------------------------------------------------------------------------
-// Helmet (Security Middleware)
-//
-// This middleware helps secure the Express application by setting various HTTP headers.
-//
-// Without Helmet, the application would:
-// - Be vulnerable to XSS attacks
-// - Be susceptible to clickjacking
-// - Potentially leak information through headers
-// - Not enforce HTTPS usage
-// - Be easier to exploit through various injection attacks
-//
-// Benefits : 
-// - Protects against common web vulnerabilities (XSS, CSRF, etc.)
-// - Prevents data leakage (exposing sensitive information)
-// - Enhances security posture (reduces attack surface)
-// - Improves compliance with security standards (e.g., GDPR, PCI DSS)
-//-------------------------------------------------------------------------------------------
-app.use(helmet());
-
+// GLOBAL MIDDLEWARE : Pass the Helmet Middleware function to the Express application
+app.use(helmetMiddleware);
 
 //-------------------------------------
 // Health-check endpoint
 //-------------------------------------
+// The placement of the health check endpoint is important
+// It should be placed before the 404 error handler
 function healthCheckEndpoint(req: express.Request, res: express.Response) {
-    res.status(200).json({ status: 'OK' });
+
+    // Define the options for the health check endpoint
+    const healthCheckOptions = {
+        status: 'OK',
+    }
+
+    // Send the health check response
+    res.status(200).json(healthCheckOptions);
 }
 
+// Pass the health check endpoint to the Express application
 app.get('/health', healthCheckEndpoint);
+
+//-------------------------------------------------------------------------------------------
+// 404 Error Handler
+//
+// This middleware handles requests to nERR 404 : on-existent routes.
+//
+// Without this, the application would return a 500 error for non-existent routes.
+//-------------------------------------------------------------------------------------------
+function notFoundHandler(req: express.Request, res: express.Response) {
+
+    // Define the options for the 404 error handler 
+    const notFoundOptions = {
+        error: 'ERR 404 : Route not found',
+    }
+
+    console.log('404 Error Handler called');
+
+    // Send the 404 error response
+    res.status(404).json(notFoundOptions);
+}
+// Pass the 404 error handler to the Express application
+// The '*' is a wildcard that matches all routes
+// Valid routes won't call next(), thus ensuring that the 404 error handler is not called
+app.use('*', notFoundHandler);
+
+//-------------------------------------
+// Error Handler Middleware
+//-------------------------------------
+// Pass the error handler middleware to the Express application
+app.use(errorMiddleware);
 
 // Export the configured Express application
 export default app;
