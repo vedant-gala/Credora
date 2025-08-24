@@ -1,6 +1,6 @@
 // Common utility functions for Credora
 
-export function formatDate(date: Date): string {
+/*export function formatDate(date: Date): string {
   return date.toISOString().split('T')[0];
 }
 
@@ -41,3 +41,4 @@ export function throttle<T extends (...args: any[]) => any>(
     }
   };
 }
+*/

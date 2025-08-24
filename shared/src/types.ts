@@ -1,6 +1,8 @@
 // Common types for Credora
 
-export interface User {
+export null;
+
+/*export interface User {
   id: string;
   email: string;
   name: string;
@@ -35,3 +37,4 @@ export interface PaginatedResponse<T> extends ApiResponse<T[]> {
     totalPages: number;
   };
 }
+*/
