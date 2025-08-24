@@ -6,13 +6,19 @@ services:
   # Backend API - development mode
   backend:
     build:
-      context: .                # Path to the build context (Directory within Docker)
-      dockerfile: backend/Dockerfile    # Name of the Dockerfile to use for building the image
-      target: development #Use the development stage (includes DevDependencies)
-    command: npm run dev:backend  #Use the development command with hot reloading
+      context: .                              # Path to the build context (Directory within Docker)
+      dockerfile: backend/Dockerfile          # Name of the Dockerfile to use for building the image
+      target: development                     # Use the development stage (includes DevDependencies)
+    command: npm run dev:backend              # Use the development command with hot reloading
+    ports:
+      - "3000:3000"
 
   # Web Dashboard - development mode
   web-dashboard:
     build:
-      target: development # Use the development command with hot reloading
-    command: npm run dev:web # Use the development server
+      context: .                              # Path to the build context (Directory within Docker)
+      dockerfile: web-dashboard/Dockerfile    # Name of the Dockerfile to use for building the image
+      target: development                     # Use the development stage (includes DevDependencies)
+    command: npm run dev:web                  # Use the development command with hot reloading
+    ports:
+      - "3001:3001"

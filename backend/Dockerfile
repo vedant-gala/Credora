@@ -19,7 +19,7 @@ COPY ../package-lock.json ./
 # Install ALL dependencies including devDependencies (TypeScript, nodemon, etc.)
 RUN npm ci
 COPY . .
-EXPOSE 3001
+EXPOSE 3000
 CMD ["npm", "run", "dev"]
 
 # =============================================================================
@@ -43,11 +43,11 @@ COPY package*.json ./
 RUN npm ci --omit=dev
 # Copy the compiled application from the build stage
 COPY --from=builder /app/dist ./dist
-EXPOSE 3001
+EXPOSE 3000
 CMD ["npm", "start"]
 
 # =============================================================================
 # HEALTHCHECK - Only for production
 # =============================================================================
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:3001/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"
+  CMD node -e "require('http').get('http://localhost:3000/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"

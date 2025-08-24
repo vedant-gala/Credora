@@ -71,8 +71,14 @@ app.use(cors());
 app.use(helmet());
 
 
+//-------------------------------------
+// Health-check endpoint
+//-------------------------------------
+function healthCheckEndpoint(req: express.Request, res: express.Response) {
+    res.status(200).json({ status: 'OK' });
+}
 
-
+app.get('/health', healthCheckEndpoint);
 
 // Export the configured Express application
 export default app;

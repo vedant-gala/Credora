@@ -1,0 +1,5 @@
+services:
+  web-dashboard:
+    depends_on:
+      backend:
+        condition: service_healthy
