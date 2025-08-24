@@ -3,10 +3,10 @@
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],           // Points to backend/src/*
-      "@shared/*": ["../shared/*"]  // Points to shared/*
+      "@/*": ["src/*"],
+      "@shared/*": ["../shared/*"]
     }
   },
   "include": [

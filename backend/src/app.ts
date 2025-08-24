@@ -23,13 +23,12 @@
 
 // Imports
 import express from 'express';
-import corsMiddleware from './middleware/cors.middleware';
-import helmetMiddleware from './middleware/helmet.middleware';
-import errorMiddleware from './middleware/error.middleware';
+import corsMiddleware from '@/middleware/cors.middleware';
+import helmetMiddleware from '@/middleware/helmet.middleware';
+import errorMiddleware from '@/middleware/error.middleware';
 
 // Express application
 const app = express();
-
 //-------------------------------------
 // Middlewares
 //-------------------------------------
@@ -78,9 +77,10 @@ function notFoundHandler(req: express.Request, res: express.Response) {
     res.status(404).json(notFoundOptions);
 }
 // Pass the 404 error handler to the Express application
-// The '*' is a wildcard that matches all routes
+// Express version <5 : The '*' wildcard is used to match all routes
+// Express version >=5 : The '{*any}' wildcard is used to match all routes
 // Valid routes won't call next(), thus ensuring that the 404 error handler is not called
-app.use('*', notFoundHandler);
+app.use('/{*any}', notFoundHandler);
 
 //-------------------------------------
 // Error Handler Middleware
