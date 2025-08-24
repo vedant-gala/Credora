@@ -25,7 +25,7 @@
 import express from 'express';
 import corsMiddleware from '@/middleware/cors.middleware';
 import helmetMiddleware from '@/middleware/helmet.middleware';
-import rateLimitMiddleware from '@/middleware/ratelimit.middleware';
+import CreateRateLimitMiddleware from '@/middleware/ratelimit.middleware';
 import errorMiddleware from '@/middleware/error.middleware';
 
 // Express application
@@ -40,8 +40,9 @@ app.use(corsMiddleware);
 // GLOBAL MIDDLEWARE : Helmet : Pass the Helmet Middleware function to the Express application
 app.use(helmetMiddleware);
 
-// GLOBAL MIDDLEWARE : Rate Limit : Pass the Rate Limit Middleware function to the Express application
-app.use(rateLimitMiddleware);
+// GLOBAL MIDDLEWARE : Rate Limit : Create and Pass the Rate Limit Middleware function to the Express application
+const limiter = CreateRateLimitMiddleware();
+app.use(limiter);
 
 //-------------------------------------
 // Health-check endpoint

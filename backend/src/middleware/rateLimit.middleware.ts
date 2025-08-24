@@ -1,4 +1,3 @@
-import express from 'express';
 import rateLimit from 'express-rate-limit';
 
 //-------------------------------------------------------------------------------------------
@@ -14,7 +13,7 @@ import rateLimit from 'express-rate-limit';
 // Benefits : 
 // - Protects against API abuse
 //-------------------------------------------------------------------------------------------
-function rateLimitMiddleware(req: express.Request, res: express.Response, next: express.NextFunction) {
+function CreateRateLimitMiddleware() {
     // Define the options for the rate limit function
     // 'windowMs': The time frame for which requests are checked/remembered (in milliseconds).
     //             It is set from the RATE_LIMIT_WINDOW_MS environment variable, or defaults to 15 minutes (900000 ms).
@@ -30,12 +29,11 @@ function rateLimitMiddleware(req: express.Request, res: express.Response, next: 
     // Call the rate limit function with the options supplied above
     const rateLimitOutput = rateLimit(rateLimitOptions);
 
-    console.log('Rate Limit Middleware called');
+    console.log('Rate Limit Middleware created');
 
-    // The rate limit function returns another function that it created using the options supplied earlier
-    // so next we call it with the request, response and next inputs and return as the output of this function
-    return rateLimitOutput(req, res, next);
+    // Return the rate limit function that is created using the options supplied above
+    return rateLimitOutput;
 }
 
 // Export the rate limit middleware function
-export default rateLimitMiddleware;
+export default CreateRateLimitMiddleware;
