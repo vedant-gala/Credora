@@ -25,8 +25,10 @@
 import express from 'express';
 import corsMiddleware from '@/middleware/cors.middleware';
 import helmetMiddleware from '@/middleware/helmet.middleware';
-import CreateRateLimitMiddleware from '@/middleware/ratelimit.middleware';
+import CreateRateLimitMiddleware from '@/middleware/rateLimit.middleware';
 import errorMiddleware from '@/middleware/error.middleware';
+import apiRouter from '@/routes/api.router';
+import authRouter from '@/routes/auth.router';
 
 // Express application
 const app = express();
@@ -40,9 +42,8 @@ app.use(corsMiddleware);
 // GLOBAL MIDDLEWARE : Helmet : Pass the Helmet Middleware function to the Express application
 app.use(helmetMiddleware);
 
-// GLOBAL MIDDLEWARE : Rate Limit : Create and Pass the Rate Limit Middleware function to the Express application
-const limiter = CreateRateLimitMiddleware();
-app.use(limiter);
+// GLOBAL MIDDLEWARE : Rate Limit : Create and Pass the Rate Limiter to the Express application
+app.use(CreateRateLimitMiddleware());
 
 //-------------------------------------
 // Health-check endpoint
@@ -62,6 +63,15 @@ function healthCheckEndpoint(req: express.Request, res: express.Response) {
 
 // Pass the health check endpoint to the Express application
 app.get('/health', healthCheckEndpoint);
+
+//-------------------------------------
+// Routers
+//-------------------------------------
+// API Router : 
+app.use('/api', apiRouter);
+
+// AUTH Router:
+app.use('/auth', authRouter);
 
 //-------------------------------------------------------------------------------------------
 // 404 Error Handler

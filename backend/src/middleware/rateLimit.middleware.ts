@@ -31,7 +31,7 @@ function CreateRateLimitMiddleware() {
 
     console.log('Rate Limit Middleware created');
 
-    // Return the rate limit function that is created using the options supplied above
+    // Return the rate limiter that is created using the options supplied above
     return rateLimitOutput;
 }
 
