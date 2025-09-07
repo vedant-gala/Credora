@@ -12,6 +12,13 @@ services:
     command: npm run dev:backend              # Use the development command with hot reloading
     ports:
       - "3000:3000"
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: postgres
+      DB_HOST: postgres                       # When running via docker, we need to use the name of the service here.
+                                              # Since localhost would imply the backend service and not the postgres service
+      DB_PORT: 5432
 
   # Web Dashboard - development mode
   web-dashboard:
@@ -22,3 +29,22 @@ services:
     command: npm run dev:web                  # Use the development command with hot reloading
     ports:
       - "3001:3001"
+
+  postgres:
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+    driver: local

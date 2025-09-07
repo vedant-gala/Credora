@@ -13,15 +13,23 @@
 // Imports
 import dotenv from 'dotenv';
 import app from '@/app';
+import { connectToDatabase } from '@/config/database';
 
 // Load the root .env file
 dotenv.config();
 // Print everything (this will be VERY long)
 console.log('All env variables printed:', process.env);
 
+
+
 async function startServer() {
     try {
         const PORT = process.env['PORT'] || 3000;
+
+        // Connect to the Database
+        await connectToDatabase();
+        console.log("Database connected successfully");
+
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);
         });

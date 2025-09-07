@@ -36,6 +36,12 @@ const app = express();
 //-------------------------------------
 // Middlewares
 //-------------------------------------
+// GLOBAL MIDDLEWARE : JSON Parser : Parse the request body as JSON
+app.use(express.json());
+
+// GLOBAL MIDDLEWARE : URL Encoded Parser : Parse the request body as URL Encoded (for forms)
+app.use(express.urlencoded({ extended: true }));
+
 // GLOBAL MIDDLEWARE : CORS : Pass the CORS Middleware function to the Express application
 app.use(corsMiddleware);
 

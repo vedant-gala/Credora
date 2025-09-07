@@ -3,12 +3,21 @@
 # This file defines all the services needed to run Credora
 #
 # Services include : 
+#    - backend
+#    - web-dashboard
+#    - postgres
 #
 # Volumes include :
+#    - postgres_data
 #
 # Networks include :
 #
 # Environment variables include :
+#    - DB_USER
+#    - DB_PASSWORD
+#    - DB_NAME
+#    - DB_HOST
+#    - DB_PORT
 # ----------------------------------------------------------------------------
 services:
   # Backend API
@@ -17,6 +26,10 @@ services:
     build:
       context: ./backend        # Path to the build context (Directory within Docker)
       dockerfile: Dockerfile    # Name of the Dockerfile to use for building the image
+    depends_on:
+      postgres:
+        condition:
+          service_healthy       # Wait for the postgres service to be healthy
 
   # Web Dashboard
   web-dashboard:
@@ -24,3 +37,13 @@ services:
     build:
       context: ./web-dashboard  # Path to the build context (Directory within Docker)
       dockerfile: Dockerfile    # Name of the Dockerfile to use for building the image
+
+  # Database
+  postgres:
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    image: postgres:16
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
