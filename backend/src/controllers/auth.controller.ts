@@ -17,16 +17,16 @@ export async function register(req: Request, res: Response) {
     try{
         console.log('Registering user...');
         console.log(req.body);
-        const { username, email, password } = req.body;
+        const { email, password } = req.body;
 
         // Validate the request body
         // If any of the fields are missing, return a 400 error
-        if (!username || !email || !password) {
+        if (!email || !password) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
         // Invoke the register service
-        const result = await registerService(username, email, password);
+        const result = await registerService(email, password);
 
         if(result.success){
             // Return a success response

@@ -6,7 +6,7 @@
 //=========================================================================================
 
 // Imports
-import { Pool, PoolConfig } from 'pg';
+import { Pool, PoolConfig, Result } from 'pg';
 import dotenv from 'dotenv';
 
 // Load the environment variables
@@ -53,6 +53,18 @@ export async function connectToDatabase() {
         // The caller can also send an email to the admin
         // The caller can also display a message to the user
         console.error('Error connecting to database:', error);
+        throw error;
+    }
+}
+
+export async function query (text: string, params? : any[] ) : Promise<Result> {
+    // Note : The query method is used to query the database, it returns a promise<pg.Result>
+    try {
+        const result = await pool.query(text, params);
+        return result;
+    }
+    catch (error: any) {
+        console.error('Error querying database:', error);
         throw error;
     }
 }
