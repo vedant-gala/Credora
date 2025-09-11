@@ -12,15 +12,18 @@ import { createUser, findUserByEmail } from '@/models/User';
 //-------------------------------------
 // Register
 //-------------------------------------
-export async function registerService(email: string, password: string) {
+export async function register(email: string, password: string) {
     try{
         // Check if the user already exists
+        console.log('Checking if user already exists')
         const isExistingUser = await findUserByEmail(email);
 
         if (isExistingUser) {
+            console.log('User already exists, sending error')
             return { success: false, error: 'User already exists' };
         }
         else{
+            console.log('User does not exist, proceeding to register a new user');
             // Create a new user
             // TODO : Use hashed password instead of plain text
             const newUser = await createUser(email, password );
@@ -36,7 +39,7 @@ export async function registerService(email: string, password: string) {
 //-------------------------------------
 // Login
 //-------------------------------------
-export async function loginService(email: string, password: string) {
+export async function login(email: string, password: string) {
     try{
         // Check if the user exists
         const isExistingUser = await findUserByEmail(email);
@@ -64,7 +67,7 @@ export async function loginService(email: string, password: string) {
 //-------------------------------------
 // Logout
 //-------------------------------------
-export async function logoutService(email: string, password: string) {
+export async function logout(email: string, password: string) {
     try{
         // TODO: Implement the logout service
         return { success: true, message: 'User logged out successfully' };
@@ -75,3 +78,8 @@ export async function logoutService(email: string, password: string) {
     }
 }
 
+export const authService = {
+    register,
+    login,
+    logout
+}

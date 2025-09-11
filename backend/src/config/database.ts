@@ -8,6 +8,8 @@
 // Imports
 import { Pool, PoolConfig, Result } from 'pg';
 import dotenv from 'dotenv';
+import {join } from 'path';
+import { readFileSync } from 'fs';
 
 // Load the environment variables
 dotenv.config();
@@ -45,6 +47,9 @@ export async function connectToDatabase() {
         // Release the connection back to the pool
         // This needs to be done manually since we used pool.connect() earlier
         client.release();
+
+        // Initialize the database schema after successful connection
+        await initializeDatabase();
     } catch (error) {
         // If the connection fails, an error is thrown
         // The error is thrown to the caller
@@ -65,6 +70,52 @@ export async function query (text: string, params? : any[] ) : Promise<Result> {
     }
     catch (error: any) {
         console.error('Error querying database:', error);
+        throw error;
+    }
+}
+
+async function isDatabaseInitialized(): Promise <boolean> {
+    try {
+        // Check if the users table exists or not
+        const result = await query("SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_schema = 'public' AND table_name = 'users')")
+
+        if (!result.rows[0]?.exists) {
+            console.log('Users table does not exist, Database is not initialized')
+            return false;
+        }
+
+        console.log('Database is already initialized');
+        return true;
+    }
+    catch (error) {
+        console.log('Database not initialized');
+        return false;
+    }
+}
+
+export async function initializeDatabase() : Promise <void> {
+    try {
+        const isInitialized = await isDatabaseInitialized();
+
+        if (isInitialized) {
+            return;
+        }
+        else {
+            console.log('Since Database is not yet initialized, proceeding to initialize database');
+        }
+
+        // Get the path to the schema file
+        const schemaPath = join(__dirname, 'schema.sql');
+        // Read the schema file
+        const schemaSQL  = readFileSync(schemaPath, 'utf8');
+
+        // Execute the schema
+        await query(schemaSQL);
+        console.log('Database initialized successfully');
+
+    }
+    catch (error) {
+        console.error('Error initializing database');
         throw error;
     }
 }

@@ -8,14 +8,14 @@
 
 // Imports
 import type { Request, Response } from 'express';
-import { registerService} from '@/services/auth.service';
+import { authService} from '@/services/auth.service';
 
 //-------------------------------------
 // Register
 //-------------------------------------
 export async function register(req: Request, res: Response) {
     try{
-        console.log('Registering user...');
+        console.log('Attempting to Register user...');
         console.log(req.body);
         const { email, password } = req.body;
 
@@ -26,7 +26,7 @@ export async function register(req: Request, res: Response) {
         }
 
         // Invoke the register service
-        const result = await registerService(email, password);
+        const result = await authService.register(email, password);
 
         if(result.success){
             // Return a success response

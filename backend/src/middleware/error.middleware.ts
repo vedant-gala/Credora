@@ -19,15 +19,14 @@ import express from 'express';
 //-------------------------------------------------------------------------------------------
 function errorMiddleware(err: Error, req: express.Request, res: express.Response, next: express.NextFunction) {
     console.log('Error Middleware called');
+    console.log('Error : ', err);
+    console.log('Modifying the error to be "Internal server error"');
 
     // Don't leak sensitive information to the client
     const modifiedError = 'Internal Server Error';
 
     // Send the error response
     res.status(500).json({ error: modifiedError });
-
-    // Return the error response
-    return res.status(500).json({ error: modifiedError });
 }
 
 // Export the Error middleware function

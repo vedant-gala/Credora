@@ -26,12 +26,15 @@ export interface User {
 }
 
 // findByEmail
+// Return type : 
 export async function findUserByEmail (email: string) : Promise <any> {
     try {
         const result = await query(
             `SELECT * FROM users WHERE email = $1`, 
             [email]
         );
+
+        console.log('result', result.rows[0]);
         return result.rows[0];
     }
     catch (error: any) {
