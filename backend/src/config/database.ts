@@ -101,7 +101,7 @@ export async function initializeDatabase() : Promise <void> {
             return;
         }
         else {
-            console.log('Since Database is not yet initialized, proceeding to initialize database');
+            console.log('Since Database is not already initialized, proceeding to initialize database');
         }
 
         // Get the path to the schema file

@@ -8,6 +8,8 @@
 
 // Imports
 import { createUser, findUserByEmail } from '@/models/User';
+import jwt, { SignOptions } from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 
 //-------------------------------------
 // Register
@@ -24,10 +26,24 @@ export async function register(email: string, password: string) {
         }
         else{
             console.log('User does not exist, proceeding to register a new user');
+
+            // Hash the password
+            const saltRounds = parseInt(process.env['BCRYPT_ROUNDS']!);
+            const hashedPassword  = await bcrypt.hash(password, saltRounds);
+
             // Create a new user
-            // TODO : Use hashed password instead of plain text
-            const newUser = await createUser(email, password );
-            return { success: true, message: 'User registered successfully' };
+            const newUser = await createUser(email, hashedPassword );
+
+            // Generate tokens for improved UX, and so that user is auto-logged in after registration
+            // and directed to dashboard. Without this, user would have to separately login after registration
+            const accessToken  = generateAccessToken(newUser.id);
+            const refreshToken = generateRefreshToken(newUser.id);
+
+            return { 
+                success: true, 
+                message: 'User registered successfully',
+                accessToken,
+                refreshToken };
         }
     }
     catch(error: any){
@@ -82,4 +98,33 @@ export const authService = {
     register,
     login,
     logout
+}
+
+
+//-------------------------------------
+// GenerateAccessToken
+//-------------------------------------
+function generateAccessToken(userId: string) : string {
+
+    const SignOpts = {expiresIn: process.env['JWT_EXPIRES_IN']!};
+
+    return jwt.sign(
+        { userId },
+        process.env['JWT_SECRET']!,
+        SignOpts as SignOptions
+    );    
+}
+
+//-------------------------------------
+// GenerateRefreshToken
+//-------------------------------------
+function generateRefreshToken(userId: string) : string {
+
+    const SignOpts = {expiresIn: process.env['JWT_REFRESH_EXPIRES_IN']!};
+
+    return jwt.sign(
+        { userId },
+        process.env['JWT_REFRESH_SECRET']!,
+        SignOpts as SignOptions
+    );    
 }

@@ -46,14 +46,39 @@ export async function register(req: Request, res: Response) {
 //-------------------------------------
 // Login
 //-------------------------------------
-export function login(req: Request, res: Response) {
-    res.send('Login');
+export async function login(req: Request, res: Response) {
+    try{
+        console.log('Attempting to Login user...');
+        console.log(req.body);
+        const { email, password } = req.body;
+
+        // Validate the request body
+        // If any of the fields are missing, return a 400 error
+        if (!email || !password) {
+            return res.status(400).json({ error: 'Missing required fields' });
+        }
+        
+        // Invoke the login service
+        const result = await authService.login(email, password);
+
+        if (result.success){
+            return res.status(200).json({ message: 'Login successful' });
+        }
+        else{
+            return res.status(400).json({ error: result.error });
+        }
+
+    }
+    catch(error: any){
+        console.error('Error logging in user:', error);
+        return res.status(500).json({ error: 'Failed to login user' });
+    }
 }
 
 //-------------------------------------
 // Logout
 //-------------------------------------
-export function logout(req: Request, res: Response) {
+export async function logout(req: Request, res: Response) {
     res.send('Logout');
 }
 

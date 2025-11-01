@@ -33,5 +33,9 @@
     "javascript"
   ],
   "author": "Credora Team",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "all": "^0.0.0",
+    "backend": "^1.0.0"
+  }
 }
